@@ -10,7 +10,7 @@ import UIKit
 open class BaseView: UIView {
     public override init(frame: CGRect) {
         super.init(frame: frame)
-        
+        setup()
     }
     
     public required init?(coder: NSCoder) {
