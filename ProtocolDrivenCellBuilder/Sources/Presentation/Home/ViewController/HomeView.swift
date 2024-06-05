@@ -8,8 +8,8 @@
 import UIKit
 import SnapKit
 
-final class HomeView: BaseView {
-    let collectionView: UICollectionView = UICollectionView(frame: .zero)
+class HomeView: BaseView {
+    let collectionView: UICollectionView = UICollectionView(scrollDirection: .vertical)
     
     override func setupSubviews() {
         addSubview(collectionView)
@@ -17,7 +17,18 @@ final class HomeView: BaseView {
     
     override func setupConstraints() {
         collectionView.snp.makeConstraints { make in
-            make.edges.equalTo(safeAreaLayoutGuide)
+            make.edges.equalToSuperview()
         }
+    }
+}
+
+extension UICollectionView {
+    public convenience init(scrollDirection: UICollectionView.ScrollDirection,
+                            flowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()) {
+        flowLayout.scrollDirection = scrollDirection
+        self.init(frame: .zero, collectionViewLayout: flowLayout)
+        self.delaysContentTouches = false
+        self.canCancelContentTouches = true
+        self.backgroundColor = .clear
     }
 }
